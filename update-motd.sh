@@ -23,17 +23,16 @@ LightGray='\033[0;37m'
 White='\033[1;37m'
 NC='\033[0m' # No Color
 
-# Ex: printf "I ${Red}love${NC} Stack ${Green}Overflow${NC}\n"
-
 #Commandes lines
 #ip_lan=$(ip addr show scope global | grep inet | cut -d' ' -f6 | cut -d/ -f1)
-ip_pub=$(curl -sS http://ifconfig.co)
+date=$(date -R)
+hostname=$(hostname -f)
+debian_version=$(cat /etc/debian_version)
 up=$(uptime | awk -F"up " '{print $2}' | awk -F"," '{print $1}')
+kernel_version=$(uname --machine --operating-system --kernel-release)
 mem_used=$(df -h | grep 'dev/root' | awk '{print $3}')
 mem_available=$(df -h | grep 'dev/root' | awk '{print $4}')
-debian_version=$(cat /etc/debian_version)
-kernel_version=$(uname --machine --operating-system --kernel-release)
-hostname=$(hostname -f)
+ip_pub=$(curl -sS http://ifconfig.co)
 
 printf "
 ${Green}      .~~.   .~~.
@@ -47,6 +46,7 @@ ${Red}     (  : '~' :  )
 ${Red}      '~ .~~~. ~'
 ${Red}          '~'
 
+${Green}Date..................:   ${Red}$date
 ${Green}Hostname..............:   ${Red}$hostname
 ${Green}OS Version............:   ${Red}$debian_version
 ${Green}Kernel................:   ${Red}$kernel_version
@@ -54,8 +54,7 @@ ${Green}Free..................:   ${Red}$mem_available
 ${Green}Uptime................:   ${Red}$up
 ${Green}Public IP.............:   ${Red}$ip_pub
 
-${NC}"
-#> $motd_file
+${NC}" > $motd_file
 
 # ${Green}Local IP..............:
 # ${Red}$ip_lan
