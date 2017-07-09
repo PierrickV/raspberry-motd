@@ -4,7 +4,6 @@
 motd_file="/etc/motd"
 
 #Define color to use
-
 Black='\033[0;30m'
 DarkGray='\033[1;30m'
 Red='\033[0;31m'
@@ -23,8 +22,7 @@ LightGray='\033[0;37m'
 White='\033[1;37m'
 NC='\033[0m' # No Color
 
-#Commandes lines
-#ip_lan=$(ip addr show scope global | grep inet | cut -d' ' -f6 | cut -d/ -f1)
+# Define comand to use
 date=$(date -R)
 hostname=$(hostname -f)
 debian_version=$(cat /etc/debian_version)
@@ -55,6 +53,3 @@ ${Green}Uptime................:   ${Red}$up
 ${Green}Public IP.............:   ${Red}$ip_pub
 
 ${NC}" > $motd_file
-
-# ${Green}Local IP..............:
-# ${Red}$ip_lan
