@@ -25,7 +25,7 @@ NC='\033[0m' # No Color
 # Define comand to use
 date=$(date -R)
 hostname=$(hostname -f)
-debian_version=$(cat /etc/debian_version)
+os_version=$(lsb_release --description | cut -d ":" -f 2 | tr -d "\t")
 up=$(uptime | awk -F"up " '{print $2}' | awk -F"," '{print $1}')
 kernel_version=$(uname --machine --operating-system --kernel-release)
 mem_used=$(df -h | grep 'dev/root' | awk '{print $3}')
@@ -46,8 +46,9 @@ ${Red}          '~'
 
 ${Green}Date..................:   ${Red}$date
 ${Green}Hostname..............:   ${Red}$hostname
-${Green}OS Version............:   ${Red}$debian_version
+${Green}OS Version............:   ${Red}$os_version
 ${Green}Kernel................:   ${Red}$kernel_version
+${Green}Used..................:   ${Red}$mem_used
 ${Green}Free..................:   ${Red}$mem_available
 ${Green}Uptime................:   ${Red}$up
 ${Green}Public IP.............:   ${Red}$ip_pub
